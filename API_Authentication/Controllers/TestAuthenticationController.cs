@@ -8,12 +8,25 @@ namespace API_Authentication.Controllers
     [ApiController]
     public class TestAuthenticationController : ControllerBase
     {
+        private readonly IHttpContextAccessor _contextAccessor;
+        public TestAuthenticationController(IHttpContextAccessor contextAccessor)
+        {
+            _contextAccessor = contextAccessor;
+        }
         [Authorize]
         [AuthorizationFilter("Admin")]
         [HttpGet("/admin")]
         public IActionResult HelloAdmin()
         {
-            return Ok("this account admin!!!");
+            try
+            {
+                string user = CommonUtils.GetCurrentUserId(_contextAccessor);
+                return Ok(user);
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         //[Authorize(Roles = "Customer")]

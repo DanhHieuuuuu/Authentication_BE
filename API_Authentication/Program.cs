@@ -10,6 +10,7 @@ namespace API_Authentication
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             var jwtSettings = new Jwtsettings();
             builder.Configuration.GetSection("JwtSettings").Bind(jwtSettings);
             builder.Services.AddSingleton(jwtSettings);
@@ -36,6 +37,7 @@ namespace API_Authentication
                     };
                 });
             builder.Services.AddAuthorization();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
