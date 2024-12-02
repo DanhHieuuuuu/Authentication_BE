@@ -1,0 +1,6 @@
+services:
+  api_authentication:
+    image: ${DOCKER_REGISTRY-}apiauthentication
+    build:
+      context: .
+      dockerfile: API_Authentication/Dockerfile

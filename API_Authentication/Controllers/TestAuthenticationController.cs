@@ -37,5 +37,10 @@ namespace API_Authentication.Controllers
         {
             return Ok("this account customer!!!");
         }
+
+        public IActionResult HelloWord()
+        {
+            return Ok("hieu hieu hieu");
+        }
     }
 }
